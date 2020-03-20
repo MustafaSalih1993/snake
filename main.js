@@ -3,9 +3,9 @@ const ctx = canvas.getContext('2d')
 
 canvas.style.backgroundColor = '#1b1b1b'
 
-const scale = 12
-let w = canvas.width = scale * 50
-let h = canvas.height = scale * 40
+const scale = 15
+let w = canvas.width = scale * 40
+let h = canvas.height = scale * 36
 
 function createNewFoodLocation() {
   return {
@@ -35,7 +35,12 @@ class Snake {
       return false
     }
   }
-  drawFood(food) {
+  drawFood() {
+    for (let i = 0; i < this.length.length; i++) {
+      if (food.x === this.length[i].x && food.y === this.length[i].y) {
+        food = createNewFoodLocation()
+      }
+    }
     ctx.beginPath()
     ctx.fillStyle = `rgba(${Math.random()*255},${Math.random()*255},${Math.random()*255},.5)`
     ctx.fillRect(food.x, food.y, scale - 2, scale - 2)
@@ -50,8 +55,12 @@ class Snake {
     })
   }
   dir(x, y) {
-    this.nx = x
-    this.ny = y
+    if (x !== -this.nx) {
+      this.nx = x
+    }
+    if (y !== -this.ny) {
+      this.ny = y
+    }
   }
   grow() {
     this.length.push({})
@@ -78,7 +87,7 @@ class Snake {
     this.ny = 0
   }
   update() {
-    this.drawFood(food)
+    this.drawFood()
     this.head.x += this.nx
     this.head.y += this.ny
     this.checkEnd()
@@ -94,7 +103,7 @@ class Snake {
     }
     if (this.distance(this.head.x, this.head.y, food.x, food.y)) {
       food = createNewFoodLocation()
-      this.drawFood(food)
+      this.drawFood()
       this.grow()
     }
     if (this.head.x > canvas.width - scale || this.head.x < 0 || this.head.y > canvas.height - scale || this.head.y < 0) {
