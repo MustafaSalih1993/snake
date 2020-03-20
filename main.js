@@ -3,9 +3,9 @@ const ctx = canvas.getContext('2d')
 
 canvas.style.backgroundColor = '#1b1b1b'
 
-const scale = 15
-let w = canvas.width = scale * 40
-let h = canvas.height = scale * 36
+const scale = 20
+let w = canvas.width = scale * 30
+let h = canvas.height = scale * 30
 
 function createNewFoodLocation() {
   return {
