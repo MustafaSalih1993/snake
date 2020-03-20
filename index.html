@@ -12,12 +12,38 @@
     body {
       margin: 0;
       padding: 0;
-      display: flex;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      color: #f1f1f1;
       background-color: #333;
+      font-family: monospace;
+    }
+
+    .left-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5em;
+    }
+
+    .right-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5em;
     }
   </style>
+  <div class="left-col">
+    <h2>Current Score</h2>
+    <h3 id="current"></h3>
+  </div>
   <canvas></canvas>
+  <div class="right-col">
+    <h2>High Score</h2>
+    <h3 id="score"></h3>
+  </div>
   <script src="main.js"></script>
 </body>
 

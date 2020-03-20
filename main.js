@@ -1,7 +1,9 @@
 //CHECK THE WORKING GAME ON--> https://mustafasalih1993.github.io/snakeGame/
 const canvas = document.querySelector('canvas')
 const ctx = canvas.getContext('2d')
-
+let current = document.getElementById('current')
+let highScore = document.getElementById('score')
+highScore.innerText = 0
 canvas.style.backgroundColor = '#1b1b1b'
 
 const scale = 20
@@ -24,6 +26,7 @@ class Snake {
     this.head = this.length[0]
     this.nx = 1 * scale
     this.ny = 0
+    this.score = 0
   }
   distance(x1, y1, x2, y2) {
     let a = x2 - x1
@@ -64,7 +67,13 @@ class Snake {
     }
   }
   grow() {
+    let tmp = parseInt(highScore.innerText)
     this.length.push({})
+    this.score++
+    current.innerText = this.score
+    if (tmp < this.score) {
+      highScore.innerText = this.score
+    }
   }
   checkEnd() {
     let head = this.length[0]
@@ -86,6 +95,7 @@ class Snake {
     this.head = this.length[0]
     this.nx = 1 * scale
     this.ny = 0
+    this.score = 0
   }
   update() {
     this.drawFood()
