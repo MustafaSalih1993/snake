@@ -3,7 +3,7 @@ const canvas = document.querySelector('canvas')
 const ctx = canvas.getContext('2d')
 let current = document.getElementById('current')
 let highScore = document.getElementById('score')
-highScore.innerText = 0
+highScore.innerText = localStorage.getItem('Highscore') || 0
 canvas.style.backgroundColor = '#1b1b1b'
 
 const scale = 20
@@ -27,6 +27,45 @@ class Snake {
     this.nx = 1 * scale
     this.ny = 0
     this.score = 0
+    this.colors = ['#EBEFF2', '#253B40', '#A65A2E', '#D9A384', '#002C72', '#2D5EF0', '#01F3FF', '#11C9EB', '#FFE701']
+    this.pickColor = this.colors[Math.floor(Math.random() * this.colors.length)]
+  }
+  changeColor() {
+    this.pickColor = this.colors[Math.floor(Math.random() * this.colors.length)]
+  }
+  checkLength() {
+    switch (this.length.length - 1) {
+      case 10:
+        this.changeColor()
+        break;
+      case 20:
+        this.changeColor()
+        break;
+      case 30:
+        this.changeColor()
+        break;
+      case 40:
+        this.changeColor()
+        break;
+      case 50:
+        this.changeColor()
+        break;
+      case 60:
+        this.changeColor()
+        break;
+      case 70:
+        this.changeColor()
+        break;
+      case 80:
+        this.changeColor()
+        break;
+      case 90:
+        this.changeColor()
+        break;
+      case 100:
+        this.changeColor()
+        break;
+    }
   }
   distance(x1, y1, x2, y2) {
     let a = x2 - x1
@@ -50,13 +89,14 @@ class Snake {
     ctx.fillRect(food.x, food.y, scale - 2, scale - 2)
     ctx.closePath()
   }
+  drawBlock = (block) => {
+    ctx.beginPath()
+    ctx.fillStyle = this.pickColor
+    ctx.fillRect(block.x, block.y, scale - 2, scale - 2)
+    ctx.closePath()
+  }
   drawSnake() {
-    this.length.forEach(block => {
-      ctx.beginPath()
-      ctx.fillStyle = 'rgba(0,255,255,.5)'
-      ctx.fillRect(block.x, block.y, scale - 2, scale - 2)
-      ctx.closePath()
-    })
+    this.length.forEach(this.drawBlock)
   }
   dir(x, y) {
     if (x !== -this.nx) {
@@ -73,7 +113,9 @@ class Snake {
     current.innerText = this.score
     if (tmp < this.score) {
       highScore.innerText = this.score
+      localStorage.setItem('Highscore', JSON.stringify(tmp))
     }
+    this.checkLength()
   }
   checkEnd() {
     let head = this.length[0]
