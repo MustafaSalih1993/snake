@@ -113,7 +113,7 @@ class Snake {
     current.innerText = this.score
     if (tmp < this.score) {
       highScore.innerText = this.score
-      localStorage.setItem('Highscore', JSON.stringify(tmp))
+      localStorage.setItem('Highscore', JSON.stringify(this.score))
     }
     this.checkLength()
   }
