@@ -27,44 +27,17 @@ class Snake {
     this.nx = 1 * scale
     this.ny = 0
     this.score = 0
-    this.colors = ['#EBEFF2', '#253B40', '#A65A2E', '#D9A384', '#002C72', '#2D5EF0', '#01F3FF', '#11C9EB', '#FFE701']
+    this.colors = ['#F24535', '#A67D03', '#0ABF04', '#F23D7F', '#0528F2', '#0104E7', '#00AEE9', '#03D8DB', '#00F0AF', '#FC393E', '#F20530', '#33308C', '#F2CB05', '#F2B705', '#F23005']
     this.pickColor = this.colors[Math.floor(Math.random() * this.colors.length)]
+    this.cc = 0
   }
   changeColor() {
     this.pickColor = this.colors[Math.floor(Math.random() * this.colors.length)]
   }
   checkLength() {
-    switch (this.length.length - 1) {
-      case 10:
-        this.changeColor()
-        break;
-      case 20:
-        this.changeColor()
-        break;
-      case 30:
-        this.changeColor()
-        break;
-      case 40:
-        this.changeColor()
-        break;
-      case 50:
-        this.changeColor()
-        break;
-      case 60:
-        this.changeColor()
-        break;
-      case 70:
-        this.changeColor()
-        break;
-      case 80:
-        this.changeColor()
-        break;
-      case 90:
-        this.changeColor()
-        break;
-      case 100:
-        this.changeColor()
-        break;
+    if (this.cc + 10 == this.length.length - 1) {
+      this.changeColor()
+      this.cc = this.cc + 10
     }
   }
   distance(x1, y1, x2, y2) {
@@ -138,6 +111,7 @@ class Snake {
     this.nx = 1 * scale
     this.ny = 0
     this.score = 0
+    this.cc = 0
   }
   update() {
     this.drawFood()
