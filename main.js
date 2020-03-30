@@ -1,4 +1,3 @@
-//CHECK THE WORKING GAME ON--> https://mustafasalih1993.github.io/snakeGame/
 const canvas = document.querySelector('canvas')
 const ctx = canvas.getContext('2d')
 let current = document.getElementById('current')
